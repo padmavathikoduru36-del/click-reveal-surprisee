@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#fce4ec">
+  <title>Surprise Gift - You Make Everything Bloom</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Floating Hearts -->
+    <div class="floating-hearts" id="floatingHearts"></div>
+    
+    <!-- Falling Petals -->
+    <div class="falling-petals" id="fallingPetals"></div>
+    
+    <!-- Clouds -->
+    <div class="clouds">
+      <div class="cloud cloud-1"></div>
+      <div class="cloud cloud-2"></div>
+      <div class="cloud cloud-3"></div>
+    </div>
+    
+    <!-- Header -->
+    <header class="header">
+      <h1 class="title">A Little Surprise for You</h1>
+      <p class="subtitle">Drag the watering can to help the flowers bloom</p>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Watering Can -->
+      <div class="watering-can" id="wateringCan">
+        <svg viewBox="0 0 100 80" class="watering-can-svg">
+          <!-- Spout -->
+          <path d="M75 35 L95 25 L97 28 L80 40 Z" fill="#e91e63"/>
+          <!-- Body -->
+          <ellipse cx="45" cy="45" rx="30" ry="25" fill="url(#canGradient)"/>
+          <!-- Handle -->
+          <path d="M25 25 Q15 15 25 5 Q35 5 35 15 Q35 25 25 25" fill="none" stroke="#ec407a" stroke-width="4" stroke-linecap="round"/>
+          <!-- Shine -->
+          <ellipse cx="35" cy="35" rx="8" ry="5" fill="rgba(255,255,255,0.4)"/>
+          <!-- Water drops coming out -->
+          <g class="water-drops-spout" id="waterDropsSpout">
+            <circle cx="92" cy="32" r="2" fill="#64b5f6"/>
+            <circle cx="88" cy="38" r="1.5" fill="#64b5f6"/>
+            <circle cx="94" cy="36" r="1.5" fill="#64b5f6"/>
+          </g>
+          <defs>
+            <linearGradient id="canGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#f48fb1"/>
+              <stop offset="100%" style="stop-color:#e91e63"/>
+            </linearGradient>
+          </defs>
+        </svg>
+        <span class="watering-can-label">Drag me!</span>
+      </div>
+      
+      <!-- Flower Pot Area -->
+      <div class="flower-area">
+        <!-- Water Drops -->
+        <div class="water-drops" id="waterDrops"></div>
+        
+        <!-- Sparkles -->
+        <div class="sparkles" id="sparkles"></div>
+        
+        <!-- Flowers -->
+        <div class="flowers" id="flowers">
+          <!-- Flower 1 -->
+          <div class="flower flower-1" data-index="0">
+            <div class="flower-stem"></div>
+            <div class="flower-head">
+              <div class="petal petal-1"></div>
+              <div class="petal petal-2"></div>
+              <div class="petal petal-3"></div>
+              <div class="petal petal-4"></div>
+              <div class="petal petal-5"></div>
+              <div class="flower-center"></div>
+            </div>
+            <div class="leaf leaf-left"></div>
+            <div class="leaf leaf-right"></div>
+          </div>
+          
+          <!-- Flower 2 -->
+          <div class="flower flower-2" data-index="1">
+            <div class="flower-stem"></div>
+            <div class="flower-head">
+              <div class="petal petal-1"></div>
+              <div class="petal petal-2"></div>
+              <div class="petal petal-3"></div>
+              <div class="petal petal-4"></div>
+              <div class="petal petal-5"></div>
+              <div class="flower-center"></div>
+            </div>
+            <div class="leaf leaf-left"></div>
+            <div class="leaf leaf-right"></div>
+          </div>
+          
+          <!-- Flower 3 -->
+          <div class="flower flower-3" data-index="2">
+            <div class="flower-stem"></div>
+            <div class="flower-head">
+              <div class="petal petal-1"></div>
+              <div class="petal petal-2"></div>
+              <div class="petal petal-3"></div>
+              <div class="petal petal-4"></div>
+              <div class="petal petal-5"></div>
+              <div class="flower-center"></div>
+            </div>
+            <div class="leaf leaf-left"></div>
+            <div class="leaf leaf-right"></div>
+          </div>
+        </div>
+        
+        <!-- Pot -->
+        <div class="pot" id="pot">
+          <div class="pot-rim"></div>
+          <div class="pot-body">
+            <div class="pot-decoration"></div>
+          </div>
+          <div class="pot-shadow"></div>
+        </div>
+        
+        <!-- Progress Bar -->
+        <div class="progress-container">
+          <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+          <span class="progress-text" id="progressText">0% bloomed</span>
+        </div>
+      </div>
+    </main>
+    
+    <!-- Revealed Message -->
+    <div class="message-container" id="messageContainer">
+      <div class="message-box">
+        <div class="message-hearts">
+          <span class="msg-heart">&#10084;</span>
+          <span class="msg-heart">&#10084;</span>
+          <span class="msg-heart">&#10084;</span>
+        </div>
+        <h2 class="message-title" id="messageTitle">You make everything bloom</h2>
+        <p class="message-subtitle">Thank you for being you</p>
+        <div class="message-hearts">
+          <span class="msg-heart">&#10084;</span>
+          <span class="msg-heart">&#10084;</span>
+          <span class="msg-heart">&#10084;</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script src="script.js"></script>
+</body>
+</html>

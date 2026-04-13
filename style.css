@@ -1,0 +1,743 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Quicksand', 'Comic Sans MS', cursive, sans-serif;
+  overflow: hidden;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.container {
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: linear-gradient(135deg, #fce4ec 0%, #e1bee7 50%, #bbdefb 100%);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+/* Floating Hearts */
+.floating-hearts {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.heart {
+  position: absolute;
+  font-size: 20px;
+  animation: floatUp 8s ease-in-out infinite;
+  opacity: 0.6;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(100vh) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.6;
+  }
+  90% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(-100px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Falling Petals */
+.falling-petals {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.petal-fall {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background: linear-gradient(135deg, #f8bbd9, #f48fb1);
+  border-radius: 50% 0 50% 50%;
+  animation: fallDown 10s ease-in-out infinite;
+  opacity: 0.7;
+}
+
+@keyframes fallDown {
+  0% {
+    transform: translateY(-50px) rotate(0deg) translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.7;
+  }
+  90% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(100vh) rotate(720deg) translateX(100px);
+    opacity: 0;
+  }
+}
+
+/* Clouds */
+.clouds {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.cloud {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 50px;
+  filter: blur(2px);
+}
+
+.cloud::before,
+.cloud::after {
+  content: '';
+  position: absolute;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+}
+
+.cloud-1 {
+  width: 100px;
+  height: 40px;
+  top: 10%;
+  animation: drift 25s ease-in-out infinite;
+}
+
+.cloud-1::before {
+  width: 50px;
+  height: 50px;
+  top: -25px;
+  left: 15px;
+}
+
+.cloud-1::after {
+  width: 35px;
+  height: 35px;
+  top: -15px;
+  right: 15px;
+}
+
+.cloud-2 {
+  width: 80px;
+  height: 30px;
+  top: 25%;
+  animation: drift 30s ease-in-out infinite;
+  animation-delay: -10s;
+}
+
+.cloud-2::before {
+  width: 40px;
+  height: 40px;
+  top: -20px;
+  left: 10px;
+}
+
+.cloud-2::after {
+  width: 30px;
+  height: 30px;
+  top: -12px;
+  right: 10px;
+}
+
+.cloud-3 {
+  width: 120px;
+  height: 45px;
+  top: 5%;
+  animation: drift 35s ease-in-out infinite;
+  animation-delay: -20s;
+}
+
+.cloud-3::before {
+  width: 60px;
+  height: 60px;
+  top: -30px;
+  left: 20px;
+}
+
+.cloud-3::after {
+  width: 45px;
+  height: 45px;
+  top: -20px;
+  right: 20px;
+}
+
+@keyframes drift {
+  0% {
+    transform: translateX(-150px);
+  }
+  100% {
+    transform: translateX(calc(100vw + 150px));
+  }
+}
+
+/* Header */
+.header {
+  text-align: center;
+  z-index: 10;
+  margin-bottom: 20px;
+}
+
+.title {
+  font-size: clamp(1.5rem, 5vw, 2.5rem);
+  font-weight: 700;
+  color: #ad1457;
+  text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8);
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  font-size: clamp(0.875rem, 3vw, 1.125rem);
+  color: #7b1fa2;
+  font-weight: 500;
+}
+
+/* Main Content */
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 500px;
+  position: relative;
+  z-index: 10;
+}
+
+/* Watering Can */
+.watering-can {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: grab;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.1s ease;
+  touch-action: none;
+}
+
+.watering-can:active {
+  cursor: grabbing;
+}
+
+.watering-can.dragging {
+  cursor: grabbing;
+}
+
+.watering-can-svg {
+  width: 80px;
+  height: 64px;
+  filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.2));
+  transition: transform 0.2s ease;
+}
+
+.watering-can:hover .watering-can-svg {
+  transform: scale(1.1);
+}
+
+.watering-can.watering .watering-can-svg {
+  transform: rotate(-20deg);
+}
+
+.watering-can-label {
+  font-size: 12px;
+  color: #e91e63;
+  font-weight: 600;
+  margin-top: 4px;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 2px 8px;
+  border-radius: 10px;
+  animation: bounce 1s ease-in-out infinite;
+}
+
+.watering-can.dragging .watering-can-label,
+.watering-can.watering .watering-can-label {
+  display: none;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.water-drops-spout {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.watering-can.watering .water-drops-spout {
+  opacity: 1;
+  animation: drip 0.5s ease-in-out infinite;
+}
+
+@keyframes drip {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(3px);
+  }
+}
+
+/* Flower Area */
+.flower-area {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 100px;
+}
+
+/* Water Drops */
+.water-drops {
+  position: absolute;
+  top: -50px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150px;
+  height: 100px;
+  pointer-events: none;
+  z-index: 50;
+}
+
+.water-drop {
+  position: absolute;
+  width: 8px;
+  height: 12px;
+  background: linear-gradient(to bottom, #64b5f6, #42a5f5);
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  animation: waterFall 0.8s ease-in forwards;
+  opacity: 0.8;
+}
+
+@keyframes waterFall {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(100px) scale(0.5);
+    opacity: 0;
+  }
+}
+
+/* Sparkles */
+.sparkles {
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 150px;
+  pointer-events: none;
+  z-index: 51;
+}
+
+.sparkle {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  animation: sparkleAnim 0.6s ease-out forwards;
+}
+
+.sparkle::before,
+.sparkle::after {
+  content: '';
+  position: absolute;
+  background: #ffd54f;
+}
+
+.sparkle::before {
+  width: 2px;
+  height: 10px;
+  left: 4px;
+  top: 0;
+}
+
+.sparkle::after {
+  width: 10px;
+  height: 2px;
+  left: 0;
+  top: 4px;
+}
+
+@keyframes sparkleAnim {
+  0% {
+    transform: scale(0) rotate(0deg);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2) rotate(90deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0) rotate(180deg);
+    opacity: 0;
+  }
+}
+
+/* Flowers */
+.flowers {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 15px;
+  position: relative;
+  z-index: 20;
+}
+
+.flower {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  transition: all 0.5s ease;
+}
+
+.flower-1 {
+  --flower-color: #f48fb1;
+  --flower-color-light: #f8bbd9;
+  --scale: 0.3;
+  --height: 60px;
+}
+
+.flower-2 {
+  --flower-color: #ce93d8;
+  --flower-color-light: #e1bee7;
+  --scale: 0.3;
+  --height: 80px;
+}
+
+.flower-3 {
+  --flower-color: #90caf9;
+  --flower-color-light: #bbdefb;
+  --scale: 0.3;
+  --height: 50px;
+}
+
+.flower-stem {
+  width: 6px;
+  height: var(--height);
+  background: linear-gradient(to top, #66bb6a, #81c784);
+  border-radius: 3px;
+  transition: height 0.5s ease;
+}
+
+.flower-head {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  transform: scale(var(--scale));
+  transition: transform 0.5s ease;
+  margin-bottom: -5px;
+}
+
+.flower .petal {
+  position: absolute;
+  width: 20px;
+  height: 30px;
+  background: linear-gradient(135deg, var(--flower-color-light), var(--flower-color));
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  left: 50%;
+  top: 50%;
+  transform-origin: center bottom;
+  box-shadow: inset 0 -5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.flower .petal-1 {
+  transform: translate(-50%, -100%) rotate(0deg);
+}
+
+.flower .petal-2 {
+  transform: translate(-50%, -100%) rotate(72deg);
+}
+
+.flower .petal-3 {
+  transform: translate(-50%, -100%) rotate(144deg);
+}
+
+.flower .petal-4 {
+  transform: translate(-50%, -100%) rotate(216deg);
+}
+
+.flower .petal-5 {
+  transform: translate(-50%, -100%) rotate(288deg);
+}
+
+.flower-center {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background: radial-gradient(circle, #fff59d, #ffee58);
+  border-radius: 50%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+}
+
+.leaf {
+  position: absolute;
+  width: 15px;
+  height: 25px;
+  background: linear-gradient(135deg, #a5d6a7, #66bb6a);
+  border-radius: 50% 0 50% 50%;
+  bottom: 30px;
+  transition: all 0.5s ease;
+  transform: scale(0);
+}
+
+.leaf-left {
+  left: -12px;
+  transform: scale(0) rotate(-30deg);
+}
+
+.leaf-right {
+  right: -12px;
+  transform: scale(0) rotate(30deg) scaleX(-1);
+}
+
+/* Flower bloom states */
+.flower.blooming .flower-head {
+  animation: sway 2s ease-in-out infinite;
+}
+
+@keyframes sway {
+  0%, 100% {
+    transform: scale(var(--scale)) rotate(-5deg);
+  }
+  50% {
+    transform: scale(var(--scale)) rotate(5deg);
+  }
+}
+
+/* Pot */
+.pot {
+  position: relative;
+  margin-top: -10px;
+  transition: all 0.3s ease;
+}
+
+.pot.glowing {
+  filter: drop-shadow(0 0 20px rgba(233, 30, 99, 0.6));
+  animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  75% {
+    transform: translateX(5px);
+  }
+}
+
+.pot-rim {
+  width: 140px;
+  height: 15px;
+  background: linear-gradient(to bottom, #a1887f, #8d6e63);
+  border-radius: 5px 5px 0 0;
+  margin: 0 auto;
+}
+
+.pot-body {
+  width: 120px;
+  height: 80px;
+  background: linear-gradient(135deg, #a1887f, #6d4c41);
+  border-radius: 0 0 20px 20px;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+}
+
+.pot-decoration {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 40px;
+  border: 3px solid #8d6e63;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pot-decoration::before {
+  content: '';
+  font-size: 20px;
+  color: #8d6e63;
+}
+
+.pot-shadow {
+  width: 100px;
+  height: 10px;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  margin: 5px auto 0;
+}
+
+/* Progress */
+.progress-container {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.progress-bar {
+  width: 150px;
+  height: 12px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #f48fb1, #ce93d8, #90caf9);
+  border-radius: 6px;
+  transition: width 0.3s ease;
+}
+
+.progress-text {
+  font-size: 12px;
+  color: #7b1fa2;
+  font-weight: 600;
+  margin-top: 5px;
+  display: block;
+}
+
+/* Message */
+.message-container {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  background: rgba(252, 228, 236, 0.95);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.5s ease;
+}
+
+.message-container.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.message-box {
+  text-align: center;
+  padding: 40px;
+  animation: floatMessage 3s ease-in-out infinite;
+}
+
+@keyframes floatMessage {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.message-hearts {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin: 15px 0;
+}
+
+.msg-heart {
+  font-size: 24px;
+  color: #e91e63;
+  animation: heartbeat 1s ease-in-out infinite;
+}
+
+.msg-heart:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.msg-heart:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes heartbeat {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+}
+
+.message-title {
+  font-size: clamp(1.5rem, 6vw, 2.5rem);
+  font-weight: 700;
+  color: #ad1457;
+  text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8);
+  margin: 10px 0;
+}
+
+.message-subtitle {
+  font-size: clamp(1rem, 4vw, 1.25rem);
+  color: #7b1fa2;
+  font-weight: 500;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .watering-can {
+    top: 10px;
+    right: 10px;
+  }
+  
+  .watering-can-svg {
+    width: 60px;
+    height: 48px;
+  }
+  
+  .flower-area {
+    margin-top: 80px;
+  }
+  
+  .pot-rim {
+    width: 120px;
+  }
+  
+  .pot-body {
+    width: 100px;
+    height: 70px;
+  }
+}
