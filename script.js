@@ -1,5 +1,5 @@
 // Configuration
-const CUSTOM_MESSAGE = "You make everything bloom";
+const CUSTOM_MESSAGE = "Happy Birthday Thanuja Akka";
 const WATER_THRESHOLD = 100;
 
 // State
